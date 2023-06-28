@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <link rel="stylesheet" href="style.css">
     <script src="index.js" defer></script>
+    <script src="logo.js" defer></script>
 </head>
 
 <body draggable="false">
     <div class="viewport">
         <header>
-            <h1>randomly</h1>
+            <h1 id="logo" onclick="createLogo()"></h1>
             <div class="icon-button" onclick="copyUrl()">
                 <p>Copy</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy">

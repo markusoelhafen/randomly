@@ -30,6 +30,16 @@ header {
     justify-content: space-between;
 }
 
+#logo .italic { font-style: italic;}
+#logo .mono { font-family: 'SF Mono','Courier New', Courier, monospace; }
+#logo .mono-italic { font-family: 'SF Mono','Courier New', Courier, monospace; font-style: italic;}
+#logo .bold { font-weight: 800;}
+#logo .bold-italic { font-weight: 800; font-style: italic;}
+#logo .thin { font-weight: 100; }
+#logo .thin-serif { font-weight: 100; font-style: italic; }
+#logo .serif { font-family: 'Times New Roman', Times, serif; }
+#logo .serif-italic { font-family: 'Times New Roman', Times, serif; font-style: italic;}
+
 .icon-button {
     display: flex;
     cursor: pointer;
