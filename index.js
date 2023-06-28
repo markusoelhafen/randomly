@@ -123,6 +123,14 @@ function copyUrl() {
 
 /////// INITIALIZE ///////
 
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => { 
+    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : "light");
+})
+
 let namesArr = getQuery('names') || [];
 let availableNamesArr = getQuery('names') || [];
 let rolesArr = getQuery('roles') || [];
