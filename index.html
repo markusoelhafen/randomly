@@ -18,8 +18,8 @@
         <h2>👆</h2>
         <section name="names" id="names">
             <h3>People</h3>
-            <ul id="namesList">
-                <form onsubmit="addItem(this); return false" id="nameForm">
+            <ul id="namesList" role="names">
+                <form onsubmit="addItem(this); return false" id="nameForm" role="names">
                     <input type="text" id="nameInput" placeholder="Add name"
                         oninput="this.style.width = (this.value.length + 2) + 'ch';" />
                 </form>
@@ -27,8 +27,8 @@
         </section>
         <section name="roles" id="roles">
             <h3>Roles</h3>
-            <ul id="rolesList">
-                <form onsubmit="addItem(this); return false" id="roleForm">
+            <ul id="rolesList" role="roles">
+                <form onsubmit="addItem(this); return false" id="roleForm" role="roles">
                     <input type="text" id="roleInput" placeholder="Add role"
                         oninput="this.style.width = (this.value.length + 2) + 'ch';" />
                 </form>

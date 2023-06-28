@@ -4,35 +4,55 @@ function getQuery(parameterName) {
     return urlParams.get(parameterName)?.split('-');
 }
 
-const loadListItems = () => {
-    const forms = document.getElementsByTagName("form")
+function updateSearchQuery() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    urlParams.set('names', namesArr.join('-'));
+    urlParams.set('roles', rolesArr.join('-'));
+    window.history.replaceState(null, null, "?" + urlParams.toString());
+}
 
-    console.log('load data...')
+function getTargetArray(role) {
+    switch(role) {
+        case 'names':
+            return namesArr;
+        case 'roles':
+            return rolesArr;
+        default:
+            return [];
+    }
+}
+
+function resetListItems() {
+    const li = document.querySelectorAll(".iaNode");
+
+    li.forEach(el => {
+        try {
+            el.remove()
+        } catch (error) {
+            console.error(error)
+        }
+    });
+}
+
+const renderListItems = () => {
+    resetListItems();
+
+    const forms = document.getElementsByTagName("form");
 
     for (const node of forms) {
         const parentNode = node.parentElement
-        var items = [];
-
-        switch (node.getAttribute('id')) {
-            case 'nameForm':
-                items = namesArr;
-                break;
-            case 'roleForm':
-                items = rolesArr;
-                break;
-            default:
-                items = null;
-        }
+        var items = getTargetArray(node.getAttribute('role'));
 
         items != null &&
             items.map(item => {
                 var li = document.createElement('li');
+                li.className = 'iaNode';
+                li.onclick = deleteItem;
                 li.textContent = item;
                 parentNode.insertBefore(li, node);
             })
     }
-
-    console.log('done loading...')
 }
 
 /////// SHOW RESULTS ///////
@@ -49,7 +69,6 @@ const pickNames = () => {
 
 const displayResults = () => {
     var result;
-    console.log('display results...')
 
     var iteration = getQuery('iteration')
     iteration === undefined ? iteration = 'Today' : iteration = iteration[0]
@@ -65,50 +84,35 @@ const displayResults = () => {
             })
         }
     } else {
-        var result = 'Today, ' + pickNames(availableNamesArr) + ' is the chosen one!'
+        result = 'Today, ' + pickNames(availableNamesArr) + ' is the chosen one!'
     }
 
     const res = document.getElementById('res');
     res.innerHTML = result;
 }
 
-/////// ADD NEW ITEM TO LIST ///////
+/////// MANIPULATE ITEMS ///////
 
-const addItem = (element) => {
-    // console.log(element);
+function addItem(element) {
     const input = element.children[0]
-    // console.log(input.value)
-    var items = [];
-    var params = "";
+    const targetArr = getTargetArray(element.getAttribute('role'));
 
-    switch (input.getAttribute('id')) {
-        case 'nameInput':
-            items = namesArr;
-            params = 'names';
-            break;
-        case 'roleInput':
-            items = rolesArr;
-            params = 'roles';
-            break;
-        default:
-            items = null;
-    }
+    targetArr.push(input.value);
 
-    items.push(input.value);
-
-    // Append item to list
-    const parentNode = element.parentNode
-    const li = document.createElement('li');
-    li.textContent = input.value;
-    parentNode.insertBefore(li, element)
-
-    // Update Query
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    urlParams.set(params, items.join('-'));
-    window.history.replaceState(null, null, "?" + urlParams.toString());
+    renderListItems();
+    updateSearchQuery();
 
     input.value = "";
+}
+
+function deleteItem(element) {
+    const targetArr = getTargetArray(element.target.parentNode.getAttribute('role'));
+    const textContext = element.target.textContent;
+    const index = targetArr.indexOf(textContext);
+    index > -1 && targetArr.splice(index, 1);
+    
+    renderListItems();
+    updateSearchQuery();
 }
 
 
@@ -119,7 +123,7 @@ let availableNamesArr = getQuery('names') || [];
 let rolesArr = getQuery('roles') || [];
 
 if (namesArr.length) {
-    loadListItems();
+    renderListItems();
     displayResults();
 } else {
     console.log('No data to load...')
