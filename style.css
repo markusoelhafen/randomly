@@ -25,6 +25,33 @@ h3 {
     text-transform: uppercase;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-button {
+    display: flex;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.icon-button p {
+    color: #1AE3B3;
+    opacity: 0;
+    font-size: .5em;
+    transition: all .3s;
+}
+
+.icon-button:hover {
+    color: #1AE3B3;
+}
+
+.icon-button:hover p {
+    opacity: 1;
+    transform: translateX(-.5em);
+}
+
 .viewport {
     height: 100vh;
     padding: 1em;

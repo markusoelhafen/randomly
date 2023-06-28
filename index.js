@@ -116,6 +116,10 @@ function deleteItem(element) {
     updateSearchQuery();
 }
 
+function copyUrl() {
+    const currentUrl = window.location.href
+    navigator.clipboard.writeText(currentUrl);
+}
 
 /////// INITIALIZE ///////
 
