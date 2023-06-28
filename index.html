@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
+</head>
+
+<body draggable="false">
+    <h1>randomly</h1>
+    <section name="result" id="result">
+        <p id="res"></p>
+    </section>
+    <div id="settings">
+        <h2>👆</h2>
+        <section name="names" id="names">
+            <h3>People</h3>
+            <ul id="namesList">
+                <form onsubmit="addItem(this); return false" id="nameForm">
+                    <input type="text" id="nameInput" placeholder="Add name"
+                        oninput="this.style.width = (this.value.length + 2) + 'ch';" />
+                </form>
+            </ul>
+        </section>
+        <section name="roles" id="roles">
+            <h3>Roles</h3>
+            <ul id="rolesList">
+                <form onsubmit="addItem(this); return false" id="roleForm">
+                    <input type="text" id="roleInput" placeholder="Add role"
+                        oninput="this.style.width = (this.value.length + 2) + 'ch';" />
+                </form>
+            </ul>
+        </section>
+    </div>
+</body>
+
+</html>
