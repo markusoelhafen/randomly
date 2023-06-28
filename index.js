@@ -1,11 +1,13 @@
-const getQuery = (query) => {
+function getQuery(parameterName) {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    return urlParams.get(query)?.split('-');
+    return urlParams.get(parameterName)?.split('-');
 }
 
 const loadListItems = () => {
     const forms = document.getElementsByTagName("form")
+
+    console.log('load data...')
 
     for (const node of forms) {
         const parentNode = node.parentElement
@@ -29,9 +31,9 @@ const loadListItems = () => {
                 parentNode.insertBefore(li, node);
             })
     }
-}
 
-let namesArr, availableNamesArr, rolesArr = [];
+    console.log('done loading...')
+}
 
 /////// SHOW RESULTS ///////
 
@@ -47,11 +49,12 @@ const pickNames = () => {
 
 const displayResults = () => {
     var result;
+    console.log('display results...')
 
     var iteration = getQuery('iteration')
     iteration === undefined ? iteration = 'Today' : iteration = iteration[0]
 
-    if (rolesArr) {
+    if (rolesArr.length) {
         if (rolesArr.length > 0) {
             result = iteration + ', <br />'
             rolesArr.map((role, i) => {
@@ -61,24 +64,20 @@ const displayResults = () => {
                 else { result += '!' }
             })
         }
-
-
     } else {
         var result = 'Today, ' + pickNames(availableNamesArr) + ' is the chosen one!'
-
     }
 
     const res = document.getElementById('res');
     res.innerHTML = result;
-    // resultDiv.appendChild(content);
 }
 
 /////// ADD NEW ITEM TO LIST ///////
 
 const addItem = (element) => {
-    console.log(element);
+    // console.log(element);
     const input = element.children[0]
-    console.log(input.value)
+    // console.log(input.value)
     var items = [];
     var params = "";
 
@@ -95,7 +94,7 @@ const addItem = (element) => {
             items = null;
     }
 
-    items.push(input.value)
+    items.push(input.value);
 
     // Append item to list
     const parentNode = element.parentNode
@@ -115,14 +114,13 @@ const addItem = (element) => {
 
 /////// INITIALIZE ///////
 
-const init = () => {
-    namesArr = getQuery('names');
-    availableNamesArr = getQuery('names');
-    rolesArr = getQuery('roles');
-    // showNames();
-    // showRoles();
+let namesArr = getQuery('names') || [];
+let availableNamesArr = getQuery('names') || [];
+let rolesArr = getQuery('roles') || [];
+
+if (namesArr.length) {
     loadListItems();
     displayResults();
+} else {
+    console.log('No data to load...')
 }
-
-init();

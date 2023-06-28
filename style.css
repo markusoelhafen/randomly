@@ -6,7 +6,6 @@
 
 body {
     font-size: 20px;
-    padding: 1em;
 }
 
 h1 {
@@ -26,10 +25,16 @@ h3 {
     text-transform: uppercase;
 }
 
+.viewport {
+    height: 100vh;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
 #result {
-    height: 90vh;
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
 #result p {
@@ -50,11 +55,13 @@ h3 {
 }
 
 #settings {
+    margin-top: calc(-20px - 1em);
     margin-bottom: 60px;
+    padding: 0 20px;
 }
 
 #settings h2 {
-    margin-bottom: 20px;
+    margin-bottom: 2em;
 }
 
 #settings h3 {
