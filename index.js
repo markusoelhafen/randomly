@@ -7,8 +7,9 @@ function getQuery(parameterName) {
 function updateSearchQuery() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    urlParams.set('names', namesArr.join('-'));
-    urlParams.set('roles', rolesArr.join('-'));
+
+    namesArr.length ? urlParams.set('names', namesArr.join('-')) : urlParams.delete('names');
+    rolesArr.length ? urlParams.set('roles', rolesArr.join('-')) : urlParams.delete('roles');
     window.history.replaceState(null, null, "?" + urlParams.toString());
 }
 
@@ -19,7 +20,7 @@ function getTargetArray(role) {
         case 'roles':
             return rolesArr;
         default:
-            return [];
+            return undefined;
     }
 }
 
