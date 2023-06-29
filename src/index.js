@@ -125,6 +125,18 @@ function copyUrl() {
     setTimeout(() => success.classList.remove('visible'), 1700);
 }
 
+function showSettings() {
+    const viewport = document.getElementById("viewport")
+    viewport.style.height = 'auto';
+
+    const hint = document.getElementById('hint');
+    hint.style.display = 'block';
+
+    const settings = document.getElementById('settings');
+    const settingsIndicator = settings.getElementsByTagName('h2');
+    settingsIndicator[0].style.display = 'none';
+}
+
 /////// INITIALIZE ///////
 
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -144,4 +156,5 @@ if (namesArr.length) {
     displayResults();
 } else {
     console.log('No data to load...')
+    showSettings()
 }

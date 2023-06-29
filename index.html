@@ -3,13 +3,13 @@
 
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js" defer></script>
-    <script src="logo.js" defer></script>
+    <link rel="stylesheet" href="src/style.css">
+    <script src="src/index.js" defer></script>
+    <script src="src/logo.js" defer></script>
 </head>
 
 <body draggable="false">
-    <div class="viewport">
+    <div id="viewport">
         <header>
             <h1 id="logo" onclick="createLogo()"></h1>
             <div class="icon-button" onclick="copyUrl()">
@@ -19,6 +19,10 @@
                 </svg>
             </div>
         </header>
+        <section id="hint">
+            <h2>Start with adding some names to the list ✌️</h2>
+            <p>When you're ready hit the reload button!</p>
+        </section>
         <section name="result" id="result">
             <p id="res"></p>
         </section>
