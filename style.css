@@ -2,6 +2,7 @@
     --bg-color: #fff;
     --text-color: #000;
     --text-transparent: rgba(0, 0, 0, .3);
+    --primary-action: #2c80f6;
     --accent-1: #FF237F;
     --accent-2: #7723FF;
     --accent-3: #1AE3B3;
@@ -13,6 +14,7 @@
     --bg-color: #000;
     --text-color: #fff;
     --text-transparent: rgba(255, 255, 255, .3);
+    --primary-action: #2c80f6;
     --accent-1: #FF237F;
     --accent-2: #7723FF;
     --accent-3: #1AE3B3;
@@ -66,24 +68,30 @@ header {
 
 .icon-button {
     display: flex;
+    align-items: center;
     cursor: pointer;
     transition: all .3s;
 }
 
-.icon-button p {
-    color: #1AE3B3;
+.icon-button:hover {
+    color: var(--primary-action);
+}
+
+.icon-button .success {
+    color: var(--success);
+    background-color: var(--success-transparent);
+    border-radius: 4px;
+    padding: 4px 8px;
     opacity: 0;
-    font-size: .5em;
+    font-size: .75em;
+
     transition: all .3s;
 }
 
-.icon-button:hover {
-    color: #1AE3B3;
-}
-
-.icon-button:hover p {
+.icon-button .success.visible {
     opacity: 1;
-    transform: translateX(-.5em);
+
+    transform: translateX(-1em);
 }
 
 .viewport {

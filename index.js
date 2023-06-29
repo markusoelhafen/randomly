@@ -119,6 +119,10 @@ function deleteItem(element) {
 function copyUrl() {
     const currentUrl = window.location.href
     navigator.clipboard.writeText(currentUrl);
+
+    const success = document.getElementById('copy-success');
+    success.classList.add('visible');
+    setTimeout(() => success.classList.remove('visible'), 1700);
 }
 
 /////// INITIALIZE ///////
