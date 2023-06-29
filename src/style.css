@@ -8,6 +8,8 @@
     --accent-3: #1AE3B3;
     --success: #1AE3B3;
     --success-transparent: rgba(29, 220, 163, .1);
+
+    --animation-duration: .3s;
 }
 
 [data-theme="dark"] {
@@ -96,7 +98,7 @@ header {
     display: flex;
     align-items: center;
     cursor: pointer;
-    transition: all .3s;
+    transition: all var(--animation-duration);
 }
 
 .icon-button:hover {
@@ -111,7 +113,7 @@ header {
     opacity: 0;
     font-size: 15px;
 
-    transition: all .3s;
+    transition: all var(--animation-duration);
 }
 
 .icon-button .success.visible {
@@ -178,45 +180,69 @@ header {
 
 #settings ul {
     margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-#settings li,
+#settings li.iaNode,
 input[type=text] {
-    display: inline-block;
-    font-weight: 500;
-    list-style: none;
+    display: flex;
+    position: relative;
+    align-items: center;
+
     padding: 5px 20px;
-    border: 3px solid var(--text-color);
-    border-radius: 4px;
     margin-bottom: 10px;
     margin-right: 10px;
-    box-shadow: 4px 4px 0 0 var(--text-color);
-    position: relative;
 
+    border: 3px solid var(--text-color);
+    border-radius: 4px;
+    list-style: none;
+    overflow: hidden;
+
+    font-weight: 500;
     cursor: pointer;
 
-    transition: all .2s;
+    box-shadow: 4px 4px 0 0 var(--text-color);
+
+    transition: all .1s;
 }
 
-#settings li::before {
-    content: url('assets/trash-2.svg');
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    left: calc(50% - 15px);
-    color: var(--accent-1);
+#settings li.iaNode>* {
+    pointer-events: none;
+    display: inline-block;
+}
+
+#settings li.iaNode p {
+    transition: all .1s;
+}
+
+#settings li.iaNode:hover p {
+    transform: translateX(-1.5em);
+}
+
+#settings li.iaNode svg.list-icon {
     opacity: 0;
-    transition: all .2s;
+    height: .75em;
+    width: .75em;
+    margin-right: -.75em;
+
+    transition: all .1s;
 }
 
-#settings li:hover {
+#settings li.iaNode:hover svg {
+    opacity: 1;
+    transform: translateX(-.75em);
+}
+
+#settings li.iaNode:hover {
     color: var(--text-transparent);
     box-shadow: 2px 2px 0 0 var(--text-color);
-    transform: translate(2px, 2px)
+    transform: translate(2px, 2px);
 }
 
-#settings li:hover::before {
+#settings li.iaNode:hover svg {
     opacity: 1;
+    color: var(--accent-1);
 }
 
 #settings form {
@@ -234,13 +260,13 @@ input[type=text] {
 }
 
 input[type=text]:hover {
-    background: var(--success-transparent);
+    background: color-mix(in srgb, var(--primary-action) 20%, transparent);
 }
 
 input[type=text]:focus {
-    background: var(--success-transparent);
+    background: color-mix(in srgb, var(--primary-action) 20%, transparent);
     outline: none;
-    border-color: var(--success);
+    border-color: var(--primary-action);
 }
 
 @media screen and (min-width: 960px) {
@@ -254,7 +280,9 @@ input[type=text]:focus {
 
     h2,
     h3,
-    p {
+    p,
+    input[type=text],
+    svg.list-icon {
         font-size: 0.75em;
     }
 }
@@ -270,7 +298,9 @@ input[type=text]:focus {
 
     h2,
     h3,
-    p {
+    p,
+    input[type=text],
+    svg.list-icon {
         font-size: 0.6em;
     }
 }
